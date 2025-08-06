@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('submeterLogin', (user,password)=>{
+  cy.visit('http://localhost:3000')
+  cy.viewport(1440,900)
+
+  cy.get('#email').type(user)
+  cy.get('#password').type(password)
+  cy.contains('button','Entrar').click()
+})
