@@ -3,6 +3,7 @@
 describe('Login', ()=>{
   it('Realizando login de conta.',()=>{
     
+    cy.acessarAmbiente()
     cy.submeterLogin('papito@webdojo.com','katana123')
     
     cy.get('[data-cy="user-name"]')
@@ -16,6 +17,7 @@ describe('Login', ()=>{
 
   it('Não pode entrar com senha incorreta',()=>{
     
+    cy.acessarAmbiente()
     cy.submeterLogin('papito@webdojo.com','12345')
 
     cy.contains('Acesso negado! Tente novamente.')
@@ -25,6 +27,7 @@ describe('Login', ()=>{
 
   it('Não pode entrar com email não cadastrado',()=>{
 
+    cy.acessarAmbiente()
     cy.submeterLogin('eotaldoanao@webdojo.com','katana123')
 
     cy.contains('Acesso negado! Tente novamente.')
