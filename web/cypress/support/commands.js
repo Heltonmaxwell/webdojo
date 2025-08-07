@@ -37,7 +37,7 @@ Cypress.Commands.add('submeterLogin',(user,password)=>{ // Função para automat
 })
 
 Cypress.Commands.add('goTo',(button, namePage)=>{ //Função para acessar páginas.
-    cy.contains('h4',button)
+    cy.contains('button',button)
         .should('be.visible')
         .click()
     
