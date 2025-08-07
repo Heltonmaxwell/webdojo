@@ -24,14 +24,23 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('acessarAmbiente',()=>{
+Cypress.Commands.add('acessarAmbiente',()=>{ //Função construida para acessar o ambiente do programa
     cy.visit('http://localhost:3000')
     cy.viewport(1440,900)
 })
 
-Cypress.Commands.add('submeterLogin',(user,password)=>{
+Cypress.Commands.add('submeterLogin',(user,password)=>{ // Função para automatizar a entrada da conta do usuário
 
   cy.get('#email').type(user)
   cy.get('#password').type(password)
   cy.contains('button','Entrar').click()
+})
+
+Cypress.Commands.add('goTo',(button, namePage)=>{ //Função para acessar páginas.
+    cy.contains('h4',button)
+        .should('be.visible')
+        .click()
+    
+    cy.contains('h1',namePage)
+        .should('be.visible')
 })
