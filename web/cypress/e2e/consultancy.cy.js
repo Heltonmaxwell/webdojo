@@ -45,6 +45,29 @@ describe('testConsultoria', () => {
         cy.get('textarea[id="details"]')
             .type('Preciso de instruções sólidas sobre o manuseio de APIs utilizando a tecnologia API REST.')
 
-        //
+        const listTechnologies = [
+            'Cypress',
+            'Python',
+            'JavaScript',
+            'Flet',
+            'API-Rest'
+        ]
+
+        listTechnologies.forEach((tecnology) => {
+            cy.get('#technologies').type(tecnology).type('{enter}')
+            cy.contains('span', tecnology).should('have.text', tecnology)
+        })
+
+        cy.contains('label', 'termos de uso')
+            .find('input')
+            .check()
+        
+        cy.contains('button','Enviar formulário').click()
+
+        cy.get('.text-xl').should('have.text','Sucesso!')
+
+        cy.contains('button','Fechar').click()
+
     })
 })
+
