@@ -61,12 +61,37 @@ describe('testConsultoria', () => {
         cy.contains('label', 'termos de uso')
             .find('input')
             .check()
-        
-        cy.contains('button','Enviar formulário').click()
 
-        cy.get('.text-xl').should('have.text','Sucesso!')
+        cy.contains('button', 'Enviar formulário').click()
 
-        cy.contains('button','Fechar').click()
+        cy.get('.text-xl').should('have.text', 'Sucesso!')
+
+        cy.contains('button', 'Fechar').click()
+
+    })
+
+    it.only('Validar campos obrigatórios', () => {
+
+        // Acessando página de teste
+        cy.acessarAmbiente()
+        cy.submeterLogin('papito@webdojo.com', 'katana123')
+        cy.goTo('Formulários', 'Consultoria')
+        cy.contains('button', 'Enviar formulário').click()
+
+        // Validando campos obrigatórios
+
+        const requiredFields = [
+            'Digite nome e sobrenome',
+            'Informe um email válido',
+            'Você precisa aceitar os termos de uso'
+        ]
+
+        requiredFields.forEach((infoText) => {
+            cy.contains('p', infoText)
+                .should('be.visible')
+                .and('have.class', 'text-red-400')
+                .and('have.css', 'color', 'rgb(248, 113, 113)')
+        })
 
     })
 })
