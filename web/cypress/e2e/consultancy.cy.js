@@ -70,7 +70,7 @@ describe('testConsultoria', () => {
 
     })
 
-    it.only('Validar campos obrigatórios', () => {
+    it('Validar campos obrigatórios', () => {
 
         // Acessando página de teste
         cy.acessarAmbiente()
