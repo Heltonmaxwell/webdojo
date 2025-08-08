@@ -1,5 +1,5 @@
 describe('testConsultoria', () => {
-    it('Deve solicitar consultoria individual', () => {
+    it.only('Deve solicitar consultoria individual', () => {
         cy.acessarAmbiente()
         cy.submeterLogin('papito@webdojo.com', 'katana123')
 
@@ -64,7 +64,8 @@ describe('testConsultoria', () => {
 
         cy.contains('button', 'Enviar formulário').click()
 
-        cy.get('.text-xl').should('have.text', 'Sucesso!')
+        cy.get('.modal-content') 
+            .should('have.text', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
 
         cy.contains('button', 'Fechar').click()
 
@@ -81,18 +82,24 @@ describe('testConsultoria', () => {
         // Validando campos obrigatórios
 
         const requiredFields = [
-            'Digite nome e sobrenome',
+            'Campo obrigatório',
             'Informe um email válido',
             'Você precisa aceitar os termos de uso'
         ]
 
-        requiredFields.forEach((infoText) => {
-            cy.contains('p', infoText)
-                .should('be.visible')
-                .and('have.class', 'text-red-400')
-                .and('have.css', 'color', 'rgb(248, 113, 113)')
-        })
+        cy.get('input[placeholder="Digite seu nome completo"]')
+            .parent()
+            .find('p')
+            .should('be.visible')
+            .and('have.class', 'text-red-400')
+            .and('have.css', 'color', 'rgb(248, 113, 113)')
 
+        cy.get('input[placeholder="Digite seu email"]')
+            .parent()
+            .find('p')
+            .should('be.visible')
+            .and('have.class', 'text-red-400')
+            .and('have.css', 'color', 'rgb(248, 113, 113)')
     })
 })
 
