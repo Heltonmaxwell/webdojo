@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import 'cypress-real-events'
+
 Cypress.Commands.add('acessarAmbiente',()=>{ //Função construida para acessar o ambiente do programa
     cy.visit('http://localhost:3000')
     cy.viewport(1440,900)

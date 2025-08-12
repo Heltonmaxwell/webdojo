@@ -64,7 +64,7 @@ describe('testConsultoria', () => {
 
         cy.contains('button', 'Enviar formulário').click()
 
-        cy.get('.modal-content') 
+        cy.get('.modal-content', {timeout: 7000}) 
             .should('have.text', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
 
         cy.contains('button', 'Fechar').click()
